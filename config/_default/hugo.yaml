@@ -6,7 +6,10 @@
 # Website name (set in params.yaml under hugoblox.branding.name)
 title: ''
 # Website URL
-baseURL: 'https://example.com/'
+# Kept generic; CI deploy commands may override with -b.
+baseURL: '/'
+relativeURLs: true
+canonifyURLs: false
 
 ############################
 ## LANGUAGE

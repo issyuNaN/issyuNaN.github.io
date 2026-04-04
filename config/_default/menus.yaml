@@ -8,20 +8,20 @@ main:
     url: /
     weight: 10
   - name: Blogs
-    url: blog/
+    url: /blog/
     weight: 10
   - name: Publications
-    url: publications/
+    url: /publications/
     weight: 11
   # - name: Talks
   #   url: /#talks
   #   weight: 12
 
   - name: Experience
-    url: experience/
+    url: /experience/
     weight: 20
   - name: Projects
-    url: projects/
+    url: /projects/
     weight: 30
   # - name: Courses
   #   url: courses/
