@@ -1,5 +1,28 @@
 .news-timeline {
+  --timeline-date-color: #374151;
+  --timeline-card-bg: #f8fafc;
+  --timeline-card-border: #e5e7eb;
   margin-top: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .news-timeline {
+    --timeline-date-color: #cbd5e1;
+    --timeline-card-bg: #111827;
+    --timeline-card-border: #334155;
+  }
+}
+
+:root.dark .news-timeline {
+  --timeline-date-color: #cbd5e1;
+  --timeline-card-bg: #111827;
+  --timeline-card-border: #334155;
+}
+
+:root.light .news-timeline {
+  --timeline-date-color: #374151;
+  --timeline-card-bg: #f8fafc;
+  --timeline-card-border: #e5e7eb;
 }
 
 .timeline-item {
@@ -12,15 +35,15 @@
 
 .timeline-date {
   font-size: 0.9rem;
-  color: #374151;
+  color: var(--timeline-date-color);
   font-weight: 700;
   text-align: right;
   padding-top: 0.05rem;
 }
 
 .timeline-body {
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  background: var(--timeline-card-bg);
+  border: 1px solid var(--timeline-card-border);
   border-radius: 10px;
   padding: 0.65rem 0.85rem;
 }
