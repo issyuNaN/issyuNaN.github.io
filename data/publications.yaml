@@ -1,0 +1,34 @@
+# Maintain all publications here.
+# type options: conference, journal, other
+items:
+  # - type: conference
+  #   title: "Example Conference Paper"
+  #   authors: "First Author, Second Author, You"
+  #   venue: "Proceedings of Example Conference (EXCONF)"
+  #   year: 2026
+  #   paper_link: ""
+  #   code_link: ""
+
+  - type: journal
+    title: "A Visual Analysis Framework for Multimodal Reasoning Capabilities in Visual Language Models"
+    authors: "Wang Xia, **Xuewen Zhou**, Qi Jiang, Yunchao Wang, Guodao Sun, Ronghua Liang"
+    venue: "Journal of Computer-Aided Design & Computer Graphics (Written in Chinese)"
+    year: 2026
+    paper_link: ""
+    code_link: ""
+
+  - type: other
+    title: "基于GC-2LSTM-NN模型的频谱冲突时间比率预测方法 (GC-2LSTM-NN for Spectrum Conflict Prediction)"
+    authors: "**Xuewen Zhou**, Kechen Zheng, Xiaodong Li, Xiaoying Liu"
+    venue: "Chinese Patent(Granted) CN118944786B"
+    year: 2025
+    paper_link: ""
+    code_link: ""
+  - type: other
+    title: "一种基于信息年龄和冲突预测的动态频谱接入方法 (Dynamic Spectrum Access with Information Age and Conflict Prediction)"
+    authors: "Xiaodong Li, Kechen Zheng, **Xuewen Zhou**, Xiaoying Liu"
+    venue: "Chinese Patent(Initiative for examination as to substance) CN118741743A"
+    year: 2024
+    paper_link: ""
+    code_link: ""
+  

@@ -1,0 +1,31 @@
+# Edit this file to manage timeline content.
+# Items are sorted by `date` in descending order (newest first).
+items:
+  - date: "2026-04"
+    title: "🎉Paper Accepted"
+    summary: "Our paper 'A Visual Analysis Framework for Multimodal Reasoning Capabilities in Visual Language Models' has been accepted by the Journal of Computer-Aided Design & Computer Graphics (Written in Chinese)."
+
+  - date: "2025-10"
+    title: "🎉Patent Granted"
+    summary: "Our patent '基于GC-2LSTM-NN模型的频谱冲突时间比率预测方法' has been granted."
+  - date: "2025-10"
+    title: "🎊Enrollment"
+    summary: "I enrolled in the M.S. Science program at The University of Tokyo, majoring in Computational Biology and Medical Sciences."
+  
+
+  - date: "2025-06"
+    title: "🎊Graduation"
+    summary: "I graduated from Zhejiang University of Technology with a Bachelor of Engineering in Software Engineering."
+  - date: "2024-08"
+    title: "🎉Win Award"
+    summary: "We won the national 2nd prize in the 15th China Students Serive Outsourcing Innovation and Entrepreneurship Competition for our project 'Auto Labeling System based on Large Models for Image'."
+    
+  - date: "2023-08"
+    title: "🎈Finished Internship"
+    summary: "I completed my internship as network security engineer at Asian Olympic Games(Hangzhou 2022) "
+
+  
+  - date: "2021-09"
+    title: "🎊Enrollment"
+    summary: "I enrolled in Zhejiang University of Technology as a undergraduate student."
+  

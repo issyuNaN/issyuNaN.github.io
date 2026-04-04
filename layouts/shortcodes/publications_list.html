@@ -1,0 +1,57 @@
+{{ $items := hugo.Data.publications.items | default (slice) }}
+
+{{ $conference := where $items "type" "conference" }}
+{{ $journal := where $items "type" "journal" }}
+{{ $other := where $items "type" "other" }}
+
+<div class="pub-sections">
+  {{ $groups := slice
+    (dict "id" "conference-papers" "title" "Conference Papers" "items" $conference)
+    (dict "id" "journal-papers" "title" "Journal Papers" "items" $journal)
+    (dict "id" "other-publications" "title" "Others" "items" $other)
+  }}
+
+  {{ range $i, $group := $groups }}
+    <section id="{{ $group.id }}" class="pub-section{{ if gt $i 0 }} pub-section-separated{{ end }}">
+      <h2 class="pub-section-title">{{ $group.title }}</h2>
+
+      {{ if gt (len $group.items) 0 }}
+        <ul class="pub-list">
+          {{ range sort $group.items "year" "desc" }}
+            <li class="pub-item">
+              <div class="pub-item-title">{{ .title }}</div>
+
+              {{ if or .year .venue }}
+                <div class="pub-item-meta">
+                  {{ if .year }}<span class="pub-meta-year">{{ .year }}</span>{{ end }}
+                  {{ if and .year .venue }}<span> · </span>{{ end }}
+                  {{ if .venue }}<span class="pub-meta-venue">{{ .venue }}</span>{{ end }}
+                </div>
+              {{ end }}
+
+              {{ if .authors }}
+                <div class="pub-item-authors">{{ .authors | markdownify | replaceRE "^<p>|</p>$" "" | safeHTML }}</div>
+              {{ end }}
+              {{ $paper := .paper_link | default .link | default "" }}
+              {{ $code := .code_link | default "" }}
+              <div class="pub-item-actions">
+                <a
+                  class="pub-btn{{ if eq $paper "" }} pub-btn-disabled{{ end }}"
+                  href="{{ if ne $paper "" }}{{ $paper }}{{ else }}#{{ end }}"
+                  {{ if ne $paper "" }}target="_blank" rel="noopener"{{ else }}aria-disabled="true" tabindex="-1"{{ end }}
+                >Paper</a>
+                <a
+                  class="pub-btn{{ if eq $code "" }} pub-btn-disabled{{ end }}"
+                  href="{{ if ne $code "" }}{{ $code }}{{ else }}#{{ end }}"
+                  {{ if ne $code "" }}target="_blank" rel="noopener"{{ else }}aria-disabled="true" tabindex="-1"{{ end }}
+                >Code</a>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      {{ else }}
+        <p class="pub-empty">No entries yet.</p>
+      {{ end }}
+    </section>
+  {{ end }}
+</div>

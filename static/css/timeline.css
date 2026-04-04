@@ -1,0 +1,39 @@
+.news-timeline {
+  margin-top: 1rem;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.75rem 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+
+.timeline-date {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 700;
+  text-align: right;
+  padding-top: 0.05rem;
+}
+
+.timeline-body {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .timeline-date {
+    text-align: left;
+    padding-top: 0;
+    font-size: 0.8rem;
+  }
+}
