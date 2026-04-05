@@ -14,7 +14,7 @@ hugoblox:
       neutral: ""
   typography:
     font: sans
-    size: md
+    size: lg
   layout:
     radius: md
     spacing: comfortable

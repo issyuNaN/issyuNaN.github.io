@@ -28,6 +28,6 @@ sections:
       username: me
   - block: resume-languages
     content:
-      title: Languages
+      title: Soft Skills
       username: me
 ---

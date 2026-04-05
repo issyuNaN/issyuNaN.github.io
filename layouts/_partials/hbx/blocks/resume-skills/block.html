@@ -1,0 +1,180 @@
+{{/* Hugo Blox: Skills (Experience page custom card) */}}
+
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+
+{{ $username := "me" }}
+{{ $username_raw := index $content "username" }}
+{{ if eq (printf "%T" $username_raw) "string" }}
+  {{ $username = strings.TrimSpace $username_raw }}
+{{ end }}
+{{ $profile := partial "functions/get_author_profile" $username }}
+{{ $authors := partialCached "functions/get_authors_data" $username site.Language.Lang }}
+{{ $author_data := index $authors ($username | urlize) }}
+
+{{ $title := "" }}
+{{ $title_raw := index $content "title" }}
+{{ if $title_raw }}{{ $title = strings.TrimSpace (printf "%v" $title_raw) }}{{ end }}
+{{ $text := "" }}
+{{ $text_raw := index $content "text" }}
+{{ if $text_raw }}{{ $text = strings.TrimSpace (printf "%v" $text_raw) }}{{ end }}
+
+{{ $skills_raw := $profile.skills }}
+{{ $skill_items := slice }}
+{{ if reflect.IsSlice $skills_raw }}
+  {{ range $skills_raw }}
+    {{ if reflect.IsMap . }}
+      {{ $items_raw := index . "items" }}
+      {{ if reflect.IsSlice $items_raw }}
+        {{ range $items_raw }}
+          {{ $label := "" }}
+          {{ $icon := "" }}
+          {{ if reflect.IsMap . }}
+            {{ $label_raw := index . "label" | default (index . "Label") | default (index . "name") | default (index . "Name") }}
+            {{ if ne $label_raw nil }}
+              {{ $label = strings.TrimSpace (printf "%v" $label_raw) }}
+            {{ end }}
+            {{ $icon_raw := index . "icon" | default (index . "Icon") }}
+            {{ if ne $icon_raw nil }}
+              {{ $icon = strings.TrimSpace (printf "%v" $icon_raw) }}
+            {{ end }}
+          {{ else }}
+            {{ $label = strings.TrimSpace (printf "%v" .) }}
+          {{ end }}
+          {{ if $label }}
+            {{ $skill_items = $skill_items | append (dict "label" $label "icon" $icon) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $hobbies_raw := index $author_data "hobbies" }}
+{{ $hobby_items := slice }}
+{{ if reflect.IsSlice $hobbies_raw }}
+  {{ range $hobbies_raw }}
+    {{ $label := "" }}
+    {{ $icon := "" }}
+    {{ if reflect.IsMap . }}
+      {{ $label_raw := index . "label" | default (index . "Label") | default (index . "name") | default (index . "Name") }}
+      {{ if ne $label_raw nil }}
+        {{ $label = strings.TrimSpace (printf "%v" $label_raw) }}
+      {{ end }}
+      {{ $icon_raw := index . "icon" | default (index . "Icon") }}
+      {{ if ne $icon_raw nil }}
+        {{ $icon = strings.TrimSpace (printf "%v" $icon_raw) }}
+      {{ end }}
+    {{ else }}
+      {{ $label = strings.TrimSpace (printf "%v" .) }}
+    {{ end }}
+    {{ if $label }}
+      {{ $hobby_items = $hobby_items | append (dict "label" $label "icon" $icon) }}
+    {{ end }}
+  {{ end }}
+{{ else if eq (printf "%T" $hobbies_raw) "string" }}
+  {{ $hobby := strings.TrimSpace $hobbies_raw }}
+  {{ if $hobby }}
+    {{ $hobby_items = $hobby_items | append (dict "label" $hobby "icon" "") }}
+  {{ end }}
+{{ end }}
+
+<div class="exp-sh-header flex flex-col items-center max-w-prose mx-auto gap-3 justify-center">
+  {{ if $title }}
+    <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+      {{ $title | markdownify | emojify }}
+    </div>
+  {{ end }}
+  {{ with $text }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+</div>
+
+{{ if or (gt (len $skill_items) 0) (gt (len $hobby_items) 0) }}
+<div class="exp-sh-wrap max-w-prose mx-auto px-6 md:px-0">
+  <div class="exp-sh-card">
+    {{ if gt (len $skill_items) 0 }}
+    <div class="exp-sh-group">
+      <p class="exp-sh-group-title">Skills</p>
+      <div class="exp-sh-cloud">
+        {{ range $idx, $item := $skill_items }}
+          {{ $item_label := strings.TrimSpace (printf "%v" (index $item "label")) }}
+          {{ $icon_name := strings.TrimSpace (printf "%v" (index $item "icon")) | default "hero/wrench-screwdriver" }}
+          {{ $is_iconify := hasPrefix $icon_name "iconify:" }}
+          {{ $iconify_name := strings.TrimPrefix "iconify:" $icon_name }}
+          {{ $iconify_svg := "" }}
+          {{ if and $is_iconify $iconify_name }}
+            {{ $iconify_url := printf "https://api.iconify.design/%s.svg" $iconify_name }}
+            {{ $iconify_remote := try (resources.GetRemote $iconify_url) }}
+            {{ if and $iconify_remote (not $iconify_remote.Err) }}
+              {{ with $iconify_remote.Value }}
+                {{ $iconify_svg = .Content }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ $size_class := "exp-chip-md" }}
+          {{ if eq (mod $idx 5) 0 }}
+            {{ $size_class = "exp-chip-lg" }}
+          {{ else if eq (mod $idx 3) 0 }}
+            {{ $size_class = "exp-chip-sm" }}
+          {{ end }}
+          <span class="exp-sh-chip {{ $size_class }}">
+            <span class="exp-sh-icon-wrap">
+              {{ if $iconify_svg }}
+                {{ replaceRE "<svg" "<svg class='w-4 h-4'" $iconify_svg | safeHTML }}
+              {{ else if and $is_iconify $iconify_name }}
+                <iconify-icon {{ printf "icon=\"%s\"" $iconify_name | safeHTMLAttr }} style="width: 1rem; height: 1rem;"></iconify-icon>
+              {{ else }}
+                {{ partial "functions/get_icon" (dict "name" $icon_name "attributes" "class='w-4 h-4'") }}
+              {{ end }}
+            </span>
+            <span>{{ $item_label | emojify }}</span>
+          </span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+    {{ if gt (len $hobby_items) 0 }}
+    <div class="exp-sh-group">
+      <p class="exp-sh-group-title">Hobbies</p>
+      <div class="exp-sh-cloud">
+        {{ range $idx, $item := $hobby_items }}
+          {{ $item_label := strings.TrimSpace (printf "%v" (index $item "label")) }}
+          {{ $icon_name := strings.TrimSpace (printf "%v" (index $item "icon")) | default "hero/heart" }}
+          {{ $is_iconify := hasPrefix $icon_name "iconify:" }}
+          {{ $iconify_name := strings.TrimPrefix "iconify:" $icon_name }}
+          {{ $iconify_svg := "" }}
+          {{ if and $is_iconify $iconify_name }}
+            {{ $iconify_url := printf "https://api.iconify.design/%s.svg" $iconify_name }}
+            {{ $iconify_remote := try (resources.GetRemote $iconify_url) }}
+            {{ if and $iconify_remote (not $iconify_remote.Err) }}
+              {{ with $iconify_remote.Value }}
+                {{ $iconify_svg = .Content }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ $size_class := "exp-chip-md" }}
+          {{ if eq (mod $idx 4) 0 }}
+            {{ $size_class = "exp-chip-lg" }}
+          {{ else if eq (mod $idx 3) 0 }}
+            {{ $size_class = "exp-chip-sm" }}
+          {{ end }}
+          <span class="exp-sh-chip {{ $size_class }}">
+            <span class="exp-sh-icon-wrap">
+              {{ if $iconify_svg }}
+                {{ replaceRE "<svg" "<svg class='w-4 h-4'" $iconify_svg | safeHTML }}
+              {{ else if and $is_iconify $iconify_name }}
+                <iconify-icon {{ printf "icon=\"%s\"" $iconify_name | safeHTMLAttr }} style="width: 1rem; height: 1rem;"></iconify-icon>
+              {{ else }}
+                {{ partial "functions/get_icon" (dict "name" $icon_name "attributes" "class='w-4 h-4'") }}
+              {{ end }}
+            </span>
+            <span>{{ $item_label | emojify }}</span>
+          </span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -52,6 +52,21 @@ interests:
   - "Large Language Models"
   - "AI for Science"
   - "AI Agents for Scientific Discovery"
+hobbies:
+  - label: "Photography"
+    icon: "iconify:noto:camera"
+  - label: "Apex Legends"
+    icon: "iconify:noto:video-game"
+  - label: "Travel"
+    icon: "iconify:streamline-cyber-color:travel-bag-2"
+  - label: "Overwatch"
+    icon: "iconify:noto-v1:video-game"
+  - label: "Jazz"
+    icon: "iconify:solar:music-note-slider-bold"
+  - label: "K-pop"
+    icon: "iconify:arcticons:unpopular-music-player"
+  - label: "Movies"
+    icon: "iconify:fxemoji:moviecamera"
 education:
   - degree: "M.S. Science"
     institution: "The University of Tokyo"
@@ -75,34 +90,59 @@ skills:
   - name: "Technical Skills"
     items:
       - label: "Python"
+        icon: "devicon/python"
         level: 5
-      - label: "Machine Learning"
-        level: 5
+      - label: "JAX"
+        icon: "iconify:logos:google-bard-icon"
+        level: 3
       - label: "PyTorch"
+        icon: "devicon/pytorch"
         level: 4
       - label: "LangGraph"
+        icon: "brands/langgraph"
         level: 4
-  - name: "Research & Communication"
-    items:
-      - label: "Academic Writing"
-        level: 5
-      - label: "Conference Presentations"
+      - label: "Git"
+        icon: "devicon/git"
         level: 4
-      - label: "Grant Proposals"
+      - label: "Docker"
+        icon: "devicon/docker"
+        level: 3
+      - label: "Linux"
+        icon: "devicon/linux"
         level: 4
-languages:
-  - name: "English"
-    level: 4
-    label: "Fluent"
-  - name: "Chinese"
-    level: 5
-    label: "Native"
-  - name: "Japanese"
-    level: 3
-    label: "Normal Proficiency (JLPT N1)"
-  - name: "Korean"
-    level: 1
-    label: "Beginner"
+      - label: "LaTeX"
+        icon: "devicon/latex"
+        level: 4
+      - label: "D3.js"
+        icon: "devicon/d3js"
+        level: 3
+      - label: "Vue.js"
+        icon: "devicon/vuejs"
+        level: 3
+      - label: "Django"
+        icon: "iconify:logos:django-icon"
+        level: 3
+      - label: "OpenCV"
+        icon: "iconify:logos:opencv"
+        level: 3
+      - label: "Electron"
+        icon: "iconify:logos:electron"
+        level: 2
+
+
+soft_skills:
+  - name: "Chinese (Native)"
+    icon: "iconify:noto-v1:panda"
+  - name: "English (Fluent)"
+    icon: "iconify:noto:statue-of-liberty"
+  - name: "Japanese (JLPT N1)"
+    icon: "iconify:fluent-emoji-flat:white-flower"
+  - name: "Korean (Beginner, Studying)"
+    icon: "iconify:material-symbols:language-korean-latin"
+  - name: "Piano (Immature Level-5)"
+    icon: "iconify:noto:musical-keyboard"
+  
+
 
 awards:
   - title: "No outstanding awards yet, but stay tuned!"

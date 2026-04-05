@@ -17,6 +17,10 @@ items:
     title: "🎊Graduation"
     summary: "I graduated from Zhejiang University of Technology with a Bachelor of Engineering in Software Engineering."
   - date: "2024-08"
+    title: "🎉Eligibility Passed"
+    summary: "I passed the Japanese Proficiency Language Test with level N1. It's a great news for my 1.5 years study of Japanese!"
+    
+  - date: "2024-08"
     title: "🎉Win Award"
     summary: "We won the national 2nd prize in the 15th China Students Serive Outsourcing Innovation and Entrepreneurship Competition for our project 'Auto Labeling System based on Large Models for Image'."
     

@@ -1,0 +1,86 @@
+{{/* Hugo Blox: Soft Skills Horizontal Bars (Experience page override) */}}
+
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+
+{{ $username := "me" }}
+{{ $username_raw := index $content "username" }}
+{{ if eq (printf "%T" $username_raw) "string" }}
+  {{ $username = strings.TrimSpace $username_raw }}
+{{ end }}
+
+{{ $authors := partialCached "functions/get_authors_data" $username site.Language.Lang }}
+{{ $author_data := index $authors ($username | urlize) }}
+
+{{ $title := "" }}
+{{ $title_raw := index $content "title" }}
+{{ if $title_raw }}{{ $title = strings.TrimSpace (printf "%v" $title_raw) }}{{ end }}
+{{ if not $title }}{{ $title = "Soft Skills" }}{{ end }}
+{{ $text := "" }}
+{{ $text_raw := index $content "text" }}
+{{ if $text_raw }}{{ $text = strings.TrimSpace (printf "%v" $text_raw) }}{{ end }}
+
+{{ $soft_skills_raw := index $author_data "soft_skills" }}
+{{ $skills := slice }}
+{{ if reflect.IsSlice $soft_skills_raw }}
+  {{ range $soft_skills_raw }}
+    {{ if reflect.IsMap . }}
+      {{ $name := "" }}
+      {{ $icon := "" }}
+      {{ $desc := "" }}
+      {{ $level := 3 }}
+
+      {{ $name_raw := index . "name" | default (index . "label") | default (index . "Name") | default (index . "Label") }}
+      {{ if ne $name_raw nil }}{{ $name = strings.TrimSpace (printf "%v" $name_raw) }}{{ end }}
+      {{ $icon_raw := index . "icon" | default (index . "Icon") }}
+      {{ if ne $icon_raw nil }}{{ $icon = strings.TrimSpace (printf "%v" $icon_raw) }}{{ end }}
+      {{ $desc_raw := index . "description" | default (index . "desc") | default (index . "label_text") }}
+      {{ if ne $desc_raw nil }}{{ $desc = strings.TrimSpace (printf "%v" $desc_raw) }}{{ end }}
+      {{ $level_raw := index . "level" }}
+      {{ if ne $level_raw nil }}
+        {{ $level_str := strings.TrimSpace (printf "%v" $level_raw) }}
+        {{ if gt (len (findRE "^[0-9]+$" $level_str)) 0 }}{{ $level = int $level_str }}{{ end }}
+      {{ end }}
+      {{ if lt $level 1 }}{{ $level = 1 }}{{ end }}
+      {{ if gt $level 5 }}{{ $level = 5 }}{{ end }}
+      {{ if not $desc }}{{ $desc = printf "Level %d/5" $level }}{{ end }}
+
+      {{ if $name }}
+        {{ $skills = $skills | append (dict "name" $name "icon" $icon "desc" $desc "level" $level) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="ssb-header flex flex-col items-center max-w-prose mx-auto gap-3 justify-center">
+  <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+    {{ $title | markdownify | emojify }}
+  </div>
+  {{ with $text }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+</div>
+
+{{ if gt (len $skills) 0 }}
+<div class="ssb-wrap max-w-lg mx-auto px-4 md:px-0">
+  <div class="ssb-list">
+    {{ range $skills }}
+      {{ $icon_name := index . "icon" | default "hero/sparkles" }}
+      {{ $is_iconify := hasPrefix $icon_name "iconify:" }}
+      {{ $iconify_name := strings.TrimPrefix "iconify:" $icon_name }}
+      <article class="ssb-row">
+        <div class="ssb-icon">
+          {{ if and $is_iconify $iconify_name }}
+            <iconify-icon class="ssb-iconify" {{ printf "icon=\"%s\"" $iconify_name | safeHTMLAttr }}></iconify-icon>
+          {{ else }}
+            {{ partial "functions/get_icon" (dict "name" $icon_name "attributes" "class='w-5 h-5'") }}
+          {{ end }}
+        </div>
+        <div class="ssb-content">
+          <p class="ssb-title">{{ index . "name" | emojify }}</p>
+        </div>
+        <div class="ssb-spacer" aria-hidden="true"></div>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
