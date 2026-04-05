@@ -1,0 +1,21 @@
+.resume-biography p.text-2xl.font-semibold.text-primary-600.dark\:text-primary-400 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 400;
+  color: var(--color-neutral-700);
+}
+
+.dark .resume-biography p.text-2xl.font-semibold.text-primary-600.dark\:text-primary-400 {
+  color: var(--color-neutral-300);
+}
+
+.resume-biography p.text-lg.text-gray-700.dark\:text-gray-300 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--color-primary-600);
+}
+
+.dark .resume-biography p.text-lg.text-gray-700.dark\:text-gray-300 {
+  color: var(--color-primary-400);
+}
