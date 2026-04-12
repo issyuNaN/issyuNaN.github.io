@@ -454,3 +454,8 @@
 .dark .ssb-desc {
   color: #cbd5e1;
 }
+
+/* Hide the single-page author card shown below article share buttons. */
+.max-w-prose.print\:hidden > div[class~="flex"][class~="pt-12"][class~="pb-4"] {
+  display: none !important;
+}

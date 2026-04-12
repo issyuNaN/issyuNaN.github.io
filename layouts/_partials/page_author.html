@@ -1,0 +1,26 @@
+{{/* Author profile box */}}
+
+{{/* Don't show author box on normal pages or if author box disabled. */}}
+{{ if ne .Type "page" | and (not (or (eq site.Params.profile false) (eq .Params.profile false))) }}
+
+{{ $authors := .Params.authors }}
+{{ $authors_is_set := isset .Params "authors" }}
+
+{{/* If authors are not set at all, fallback to the site owner. */}}
+{{ if and (not $authors_is_set) (not $authors) }}
+  {{ $superuser := .Scratch.Get "superuser_slug" }}
+  {{ if $superuser }}
+    {{ $authors = (slice $superuser) }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $authors) 0 }}
+  {{ range $idx, $slug := $authors }}
+    {{ $profile := partial "functions/get_author_profile" $slug }}
+    {{ if $profile.has_data }}
+      {{ partial "page_author_card" (dict "profile" $profile "page" .) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ end }}{{/* Show profile block */}}
