@@ -48,3 +48,26 @@ export interface OfflineItem {
   icon: string
   text: string
 }
+
+export interface NoteHeading {
+  id: string
+  text: string
+  level: number
+}
+
+export interface Note {
+  slug: string
+  title: string
+  summary: string
+  date: string
+  dateLabel: string
+  readingTime: number
+  tags: string[]
+  source?: {
+    title: string
+    author: string
+    url: string
+  }
+  html: string
+  headings: NoteHeading[]
+}

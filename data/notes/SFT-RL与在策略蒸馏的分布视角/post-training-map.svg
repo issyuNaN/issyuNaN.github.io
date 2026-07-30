@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="760" viewBox="0 0 1320 760" role="img" aria-labelledby="title desc">
+  <title id="title">SFT, RL and on-policy distillation</title>
+  <desc id="desc">A comparison of where each post-training method obtains data and learning signals.</desc>
+  <rect width="1320" height="760" fill="#f2f4f2"/>
+  <text x="72" y="82" fill="#202422" font-family="Arial, sans-serif" font-size="34" font-weight="700">Where do the data and learning signal come from?</text>
+  <text x="72" y="116" fill="#68706b" font-family="Consolas, monospace" font-size="14">A DISTRIBUTIONAL VIEW OF POST-TRAINING</text>
+
+  <g transform="translate(72 170)">
+    <rect width="360" height="470" fill="#fff" stroke="#202422" stroke-width="2"/>
+    <text x="28" y="54" fill="#d2472f" font-family="Consolas, monospace" font-size="16">01 / SFT</text>
+    <text x="28" y="98" fill="#202422" font-family="Arial, sans-serif" font-size="24" font-weight="700">External dataset</text>
+    <rect x="28" y="138" width="140" height="74" fill="#f2f4f2" stroke="#68706b"/>
+    <text x="49" y="182" fill="#202422" font-family="Consolas, monospace" font-size="14">DEMONSTRATION</text>
+    <path d="M180 175H292" stroke="#d2472f" stroke-width="4"/>
+    <path d="M280 164L296 175 280 186" fill="none" stroke="#d2472f" stroke-width="4"/>
+    <circle cx="300" cy="175" r="32" fill="#365e4a"/>
+    <text x="278" y="181" fill="#fff" font-family="Consolas, monospace" font-size="13">MODEL</text>
+    <text x="28" y="272" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Dense token-level supervision</text>
+    <text x="28" y="306" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Fixed target distribution</text>
+    <text x="28" y="340" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Strong cold-start ability</text>
+    <line x1="28" y1="383" x2="332" y2="383" stroke="#d8ddd9"/>
+    <text x="28" y="424" fill="#d2472f" font-family="Consolas, monospace" font-size="13">RISK / BROAD UPDATES</text>
+  </g>
+
+  <g transform="translate(480 170)">
+    <rect width="360" height="470" fill="#fff" stroke="#202422" stroke-width="2"/>
+    <text x="28" y="54" fill="#d2472f" font-family="Consolas, monospace" font-size="16">02 / RL</text>
+    <text x="28" y="98" fill="#202422" font-family="Arial, sans-serif" font-size="24" font-weight="700">Current policy</text>
+    <circle cx="76" cy="175" r="32" fill="#365e4a"/>
+    <text x="54" y="181" fill="#fff" font-family="Consolas, monospace" font-size="13">MODEL</text>
+    <path d="M112 175H213" stroke="#365e4a" stroke-width="4"/>
+    <path d="M201 164L217 175 201 186" fill="none" stroke="#365e4a" stroke-width="4"/>
+    <rect x="220" y="138" width="112" height="74" fill="#f2f4f2" stroke="#68706b"/>
+    <text x="242" y="169" fill="#202422" font-family="Consolas, monospace" font-size="13">ROLLOUT</text>
+    <text x="244" y="190" fill="#d2472f" font-family="Consolas, monospace" font-size="13">REWARD</text>
+    <text x="28" y="272" fill="#68706b" font-family="Arial, sans-serif" font-size="17">On-policy samples</text>
+    <text x="28" y="306" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Outcome-level learning signal</text>
+    <text x="28" y="340" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Local distributional movement</text>
+    <line x1="28" y1="383" x2="332" y2="383" stroke="#d8ddd9"/>
+    <text x="28" y="424" fill="#365e4a" font-family="Consolas, monospace" font-size="13">TARGET / HIGH-REWARD TRAJECTORY</text>
+  </g>
+
+  <g transform="translate(888 170)">
+    <rect width="360" height="470" fill="#fff" stroke="#202422" stroke-width="2"/>
+    <text x="28" y="54" fill="#d2472f" font-family="Consolas, monospace" font-size="16">03 / OPD</text>
+    <text x="28" y="98" fill="#202422" font-family="Arial, sans-serif" font-size="24" font-weight="700">Student states</text>
+    <circle cx="70" cy="175" r="32" fill="#365e4a"/>
+    <text x="42" y="181" fill="#fff" font-family="Consolas, monospace" font-size="12">STUDENT</text>
+    <path d="M106 175H205" stroke="#365e4a" stroke-width="4"/>
+    <rect x="210" y="138" width="122" height="74" fill="#f2f4f2" stroke="#68706b"/>
+    <text x="239" y="169" fill="#202422" font-family="Consolas, monospace" font-size="13">TEACHER</text>
+    <text x="244" y="190" fill="#d2472f" font-family="Consolas, monospace" font-size="13">LOGITS</text>
+    <text x="28" y="272" fill="#68706b" font-family="Arial, sans-serif" font-size="17">On-policy student prefixes</text>
+    <text x="28" y="306" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Dense teacher distribution</text>
+    <text x="28" y="340" fill="#68706b" font-family="Arial, sans-serif" font-size="17">Reverse-KL-style matching</text>
+    <line x1="28" y1="383" x2="332" y2="383" stroke="#d8ddd9"/>
+    <text x="28" y="424" fill="#365e4a" font-family="Consolas, monospace" font-size="13">TARGET / TEACHER ON STUDENT STATES</text>
+  </g>
+
+  <text x="72" y="704" fill="#68706b" font-family="Arial, sans-serif" font-size="18">SFT changes the model toward external demonstrations; RL and OPD learn where the current policy already visits.</text>
+</svg>
